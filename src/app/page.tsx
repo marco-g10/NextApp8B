@@ -1,10 +1,12 @@
 "use client";
 
-// Importamos useState, que es el hook de para guardar
+// Importamos useState, que es el hook de React para guardar
+// valores que pueden cambiar (los datos del formulario y el CV)
 import { useState } from "react";
 
 export default function Page() {
 
+  // ===================== ESTADOS DEL FORMULARIO =====================
   // Cada useState guarda lo que el usuario va escribiendo en cada campo
   const [nombre, setNombre] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -15,7 +17,8 @@ export default function Page() {
   const [idiomas, setIdiomas] = useState("");
   const [skills, setSkills] = useState("");
 
-  // Aqui guardamos los datos que ya fueron confirmados con el boton
+  // ===================== ESTADO DEL CV =====================
+  // Aqui guardamos los datos que ya fueron "confirmados" con el boton
   // Empieza vacio porque el CV no se llena hasta que el usuario presiona Generar CV
   const [cv, setCv] = useState({
     nombre: "",
@@ -28,7 +31,7 @@ export default function Page() {
     skills: "",
   });
 
-  // Funcion que se ejecuta al hacer click en el boton Generar CV
+  // Funcion que se ejecuta al hacer click en el boton "Generar CV"
   // Toma todo lo que esta en los estados del formulario y lo copia al estado del CV
   function generarCV() {
     setCv({
@@ -50,12 +53,17 @@ export default function Page() {
       {/* ===================== FORMULARIO ===================== */}
       {/* Cada input usa onChange para actualizar su estado cada vez que el usuario escribe */}
 
+      {/* A cada input le ponemos color de texto negro y fondo blanco */}
+      {/* directo con "style", para que se vea bien sin importar el tema oscuro */}
+      {/* que trae la plantilla del profe en globals.css */}
+
       <p>
         Nombre:<br />
         <input
           type="text"
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -65,6 +73,7 @@ export default function Page() {
           type="text"
           value={direccion}
           onChange={(e) => setDireccion(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -74,6 +83,7 @@ export default function Page() {
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -82,6 +92,7 @@ export default function Page() {
         <textarea
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -90,6 +101,7 @@ export default function Page() {
         <textarea
           value={experiencia}
           onChange={(e) => setExperiencia(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -98,6 +110,7 @@ export default function Page() {
         <textarea
           value={educacion}
           onChange={(e) => setEducacion(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -107,6 +120,7 @@ export default function Page() {
           type="text"
           value={idiomas}
           onChange={(e) => setIdiomas(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
@@ -116,6 +130,7 @@ export default function Page() {
           type="text"
           value={skills}
           onChange={(e) => setSkills(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
         />
       </p>
 
