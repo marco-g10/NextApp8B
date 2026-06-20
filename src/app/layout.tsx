@@ -22,8 +22,3 @@ export default function RootLayout({
     </html>
   );
 }
-//verificar si estan permitidos los scripts
-//Get-ExecutionPolicy
-
-//habilitar scripts en windows, en powershild
-//Set-ExecutionPolicy Unrestricted  
