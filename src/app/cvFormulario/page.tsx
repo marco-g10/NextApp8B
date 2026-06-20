@@ -10,10 +10,9 @@ const CVGeneratorPage: React.FC = () => {
   const [empresaReciente, setEmpresaReciente] = useState('');
   const [universidad, setUniversidad] = useState('');
 
-  // Función opcional para manejar la "Vista Previa"
+
   const handlePreview = () => {
-    // Aquí podrías implementar la lógica para generar o mostrar la vista previa
-    // Por ejemplo, abriendo un modal con los datos formateados.
+   
     console.log("Generando vista previa con datos:", {
       nombreCompleto, puesto, email, perfilProfesional, empresaReciente, universidad
     });
@@ -65,7 +64,7 @@ const CVGeneratorPage: React.FC = () => {
             className="flex-1 min-w-[200px] px-3 py-1.5 border border-gray-300 rounded focus:ring-1 focus:ring-blue-400 focus:border-blue-400 outline-none transition"
           />
           
-          {/* TextArea: Perfil profesional... (con estilo de input pero expandido) */}
+          {/* TextArea: Perfil profesional */}
           <textarea
             value={perfilProfesional}
             onChange={(e) => setPerfilProfesional(e.target.value)}
