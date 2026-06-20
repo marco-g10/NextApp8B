@@ -1,0 +1,113 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 32px;
+  background: #f0f4f8;
+  min-height: 100vh;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #bcd0e8;
+  border-radius: 12px;
+  padding: 28px;
+  align-self: start;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a4f8a;
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a7ab5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 5px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #bcd0e8;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f7fafd;
+  color: #1a202c;
+  outline: none;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+/* CV preview */
+
+.cvName {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a4f8a;
+}
+
+.cvContact {
+  font-size: 13px;
+  color: #4a7ab5;
+  margin-top: 4px;
+}
+
+.divider {
+  border: none;
+  border-top: 1.5px solid #2563eb;
+  margin: 16px 0;
+}
+
+.section {
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.sectionText {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
