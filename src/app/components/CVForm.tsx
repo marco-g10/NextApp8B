@@ -4,7 +4,7 @@ import { useState } from "react"; // Hook para manejar estado
 
 export default function CVForm() { // Componente del formulario y el CV
 
-    // Un hook por cada campo del formulario
+    // Se necesita un hook por cada campo del formulario
     const [name, setName] = useState<string>(''); // Guarda el nombre
     const [address, setAddress] = useState<string>(''); // Guarda la direccion
     const [email, setEmail] = useState<string>(''); // Guarda el email
