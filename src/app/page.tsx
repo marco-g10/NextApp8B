@@ -1,57 +1,150 @@
-'use client'
+"use client";
 
-export default function Home() {
+// Importamos useState, que es el hook de para guardar
+import { useState } from "react";
 
-  //Logica o el JS
-  let name: string = "Marco"; //varieble let - var (ya no se usa)
-  const title: string = "Lista";  //declaramos contantes los valores nunca cambiaran
+export default function Page() {
 
-  const frutialumnos: string[] = [
-    "Durazniel",
-    "Platanito",
-    "Cerevelyn",
-    "Cocarlos",
-    "Kiwiker",
-    "Marielina",
-    "Manzavera"
-  ];
+  // Cada useState guarda lo que el usuario va escribiendo en cada campo
+  const [nombre, setNombre] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [email, setEmail] = useState("");
+  const [summary, setSummary] = useState("");
+  const [experiencia, setExperiencia] = useState("");
+  const [educacion, setEducacion] = useState("");
+  const [idiomas, setIdiomas] = useState("");
+  const [skills, setSkills] = useState("");
 
-  //Funciones
-  const monstrarFrutas = () => {
-    console.log(frutialumnos);
+  // Aqui guardamos los datos que ya fueron confirmados con el boton
+  // Empieza vacio porque el CV no se llena hasta que el usuario presiona Generar CV
+  const [cv, setCv] = useState({
+    nombre: "",
+    direccion: "",
+    email: "",
+    summary: "",
+    experiencia: "",
+    educacion: "",
+    idiomas: "",
+    skills: "",
+  });
+
+  // Funcion que se ejecuta al hacer click en el boton Generar CV
+  // Toma todo lo que esta en los estados del formulario y lo copia al estado del CV
+  function generarCV() {
+    setCv({
+      nombre: nombre,
+      direccion: direccion,
+      email: email,
+      summary: summary,
+      experiencia: experiencia,
+      educacion: educacion,
+      idiomas: idiomas,
+      skills: skills,
+    });
   }
- 
+
   return (
     <div>
-      <h1>{title}</h1>
-        Hola 8B los saluda {name}
+      <h1>Formulario para generar CV</h1>
 
-        <br></br>
-        <br></br>
+      {/* ===================== FORMULARIO ===================== */}
+      {/* Cada input usa onChange para actualizar su estado cada vez que el usuario escribe */}
 
-        <button onClick={monstrarFrutas}>
-          Mostrar
-        </button>
+      <p>
+        Nombre:<br />
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+        />
+      </p>
 
-        <br></br>
-        <br></br>
+      <p>
+        Direccion:<br />
+        <input
+          type="text"
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
+        />
+      </p>
 
-        <ul>
-          {frutialumnos.map((fruta, index) => (
-            <li key={index}>
-              {fruta}
-            </li>
-          ))}
+      <p>
+        Email:<br />
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </p>
 
-          {frutialumnos.map((fruta) => {
-              let x = 0;
-            return(
-            <li>
-              {fruta}
-            </li>
-            )
-          })}
-        </ul>
+      <p>
+        Summary:<br />
+        <textarea
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+        />
+      </p>
+
+      <p>
+        Experiencia:<br />
+        <textarea
+          value={experiencia}
+          onChange={(e) => setExperiencia(e.target.value)}
+        />
+      </p>
+
+      <p>
+        Educacion:<br />
+        <textarea
+          value={educacion}
+          onChange={(e) => setEducacion(e.target.value)}
+        />
+      </p>
+
+      <p>
+        Idiomas:<br />
+        <input
+          type="text"
+          value={idiomas}
+          onChange={(e) => setIdiomas(e.target.value)}
+        />
+      </p>
+
+      <p>
+        Skills:<br />
+        <input
+          type="text"
+          value={skills}
+          onChange={(e) => setSkills(e.target.value)}
+        />
+      </p>
+
+      {/* Boton que llama a la funcion generarCV cuando se hace click */}
+      <button onClick={generarCV}>Generar CV</button>
+
+      <hr />
+
+      {/* ===================== CV ===================== */}
+      {/* Aqui se muestran los valores guardados en el estado "cv" */}
+      {/* Esto solo se actualiza cuando se presiona el boton de arriba */}
+
+      <h2>CV</h2>
+
+      <p><b>Nombre:</b> {cv.nombre}</p>
+      <p><b>Direccion:</b> {cv.direccion}</p>
+      <p><b>Email:</b> {cv.email}</p>
+
+      <p><b>Summary:</b></p>
+      <p>{cv.summary}</p>
+
+      <p><b>Experiencia:</b></p>
+      <p>{cv.experiencia}</p>
+
+      <p><b>Educacion:</b></p>
+      <p>{cv.educacion}</p>
+
+      <p><b>Idiomas:</b> {cv.idiomas}</p>
+      <p><b>Skills:</b> {cv.skills}</p>
     </div>
   );
 }
