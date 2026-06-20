@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export default function Page() {
+export default function Page(){
 
     const [count, setCount] = useState<number>(0);
 
@@ -11,20 +11,20 @@ export default function Page() {
     })
 
     useEffect(() => {
-        setTimeout(() => {
-            console.log('Hello from API');
-        }, 2000);
+            setTimeout(() => {
+                console.log('Hello from API');
+            }, 2000);
     }, []);  //Se renderiza al renderizar el componente
-
+    
     useEffect(() => {
-        console.log("inside event", count);
-        document.title = `Contador: ${count}`;
+            console.log("inside event", count);
+            document.title = `Contador: ${count}`;
     }, [count]);
 
-    return (
+    return(
         <div>
             <p>Hola</p>
-            <button onClick={() => setCount(count + 1)}>Incrementar</button>
+            <button onClick={() => setCount(count +1)}>Incrementar</button>
         </div>
     )
 }

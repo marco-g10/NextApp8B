@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/sidebar";
-import CVForm from "./components/CVForm";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +16,9 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <CVForm /> /* Formulario y CV, visibles en toda la app */
+        <Sidebar />
         {children}
-      </body>
+        </body>
     </html>
   );
 }
