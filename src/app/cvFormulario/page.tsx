@@ -3,6 +3,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 // Interfaz para definir el tipo de datos de nuestro formulario
+
 interface CVData {
   name: string;
   address: string;
@@ -28,9 +29,11 @@ export default function App() {
   });
 
   // Estado para saber si mostramos el formulario o el CV generado
+  
   const [showCV, setShowCV] = useState<boolean>(false);
 
   // Funcion para guardar lo que escribe el usuario
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,22 +42,25 @@ export default function App() {
     });
   };
 
-  // Funcion al enviar el formulario
+  // Funcion para enviar el formulario
+  
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setShowCV(true); // Mostramos el CV generado
   };
 
   // Funcion para regresar al formulario
+  
   const handleBack = () => {
     setShowCV(false); // Regresamos al formulario
   };
 
   return (
-    /* Contenedor principal centrado con borde y margen simple */
+
+    //  Aqui empieza el estilo que saque de una pagina
+    
     <div style={{ maxWidth: '600px', margin: '40px auto', fontFamily: 'Arial', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-      
-      {/* 1. VISTA DEL FORMULARIO */}
+
       {showCV === false && (
         <div>
           <h1 style={{ textAlign: 'center' }}>Formulario de CV</h1>
