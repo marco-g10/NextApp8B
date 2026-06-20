@@ -1,177 +1,165 @@
-'use client'
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+"use client";
 
+// Importamos useState, que es el hook de React para guardar
+// valores que pueden cambiar (los datos del formulario y el CV)
+import { useState } from "react";
 
-// 1. DEFINICIÓN DE INTERFACES 
+export default function Page() {
 
-// Aquí defino la interfaz o "molde" que le dice a TypeScript exactamente 
-// qué datos voy a manejar en mi formulario y de qué tipo son.
-// Como todos los campos del CV son texto, los defino todos como 'string'.
-// Esto es súper útil porque si me equivoco y trato de meter un dato incorrecto,
-// TypeScript me va a avisar antes de correr el programa, evitando bugs.
-interface CVData {
-  name: string;
-  address: string;
-  email: string;
-  summary: string;
-  experience: string;
-  education: string;
-  languages: string;
-  skills: string;
-}
+  // ===================== ESTADOS DEL FORMULARIO =====================
+  // Cada useState guarda lo que el usuario va escribiendo en cada campo
+  const [nombre, setNombre] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [email, setEmail] = useState("");
+  const [summary, setSummary] = useState("");
+  const [experiencia, setExperiencia] = useState("");
+  const [educacion, setEducacion] = useState("");
+  const [idiomas, setIdiomas] = useState("");
+  const [skills, setSkills] = useState("");
 
-export default function App() {
-  
-
-  // 2. DEFINICIÓN DE ESTADOS
- 
-  
-  // Aquí declaro el estado principal llamado 'formData'. 
-  // Le indico a TypeScript que este estado va a usar la interfaz <CVData>.
-  // Empieza con todos los valores en blanco porque el usuario aún no escribe nada.
-  // Decidí usar un solo objeto en lugar de muchos estados separados para que 
-  // el código sea mucho más limpio y fácil de mantener.
-  const [formData, setFormData] = useState<CVData>({
-    name: '',
-    address: '',
-    email: '',
-    summary: '',
-    experience: '',
-    education: '',
-    languages: '',
-    skills: ''
+  // ===================== ESTADO DEL CV =====================
+  // Aqui guardamos los datos que ya fueron "confirmados" con el boton
+  // Empieza vacio porque el CV no se llena hasta que el usuario presiona Generar CV
+  const [cv, setCv] = useState({
+    nombre: "",
+    direccion: "",
+    email: "",
+    summary: "",
+    experiencia: "",
+    educacion: "",
+    idiomas: "",
+    skills: "",
   });
 
-  // Este segundo estado, 'cvData', lo utilizo para guardar la información final
-  // una vez que el usuario presiona el botón. Empieza como 'null' porque 
-  // al cargar la página no hay ningún CV. 
-  // Notar que le digo a TypeScript que puede ser <CVData | null> (los datos o nada).
-  const [cvData, setCvData] = useState<CVData | null>(null);
-
-
-  
-  // 3. FUNCIONES DE MANEJO DE EVENTOS (HANDLERS TIPADOS)
-
-  // La función 'handleChange' se dispara cada vez que el usuario teclea algo.
-  // En TypeScript, tengo que especificar qué tipo de evento es 'e'. 
-  // Uso ChangeEvent y le digo que puede venir de un Input o de un Textarea.
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    // Para no escribir 'e.target.name' y 'e.target.value' a cada rato,
-    // extraigo (desestructuro) el 'name' y el 'value' del input actual.
-    const { name, value } = e.target;
-    
-    // Actualizo el estado del formulario.
-    // Uso el spread operator '...formData' para hacer una copia de todo lo que 
-    // ya estaba escrito, y solo actualizo la propiedad [name] con el nuevo valor.
-    setFormData({
-      ...formData,
-      [name]: value
+  // Funcion que se ejecuta al hacer click en el boton "Generar CV"
+  // Toma todo lo que esta en los estados del formulario y lo copia al estado del CV
+  function generarCV() {
+    setCv({
+      nombre: nombre,
+      direccion: direccion,
+      email: email,
+      summary: summary,
+      experiencia: experiencia,
+      educacion: educacion,
+      idiomas: idiomas,
+      skills: skills,
     });
-  };
-
-  // La función 'handleSubmit' se ejecuta cuando se presiona el botón del formulario.
-  // Aquí el evento es de tipo FormEvent, vinculado a un elemento de formulario HTML.
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // Esto es súper importante: previene que la página se recargue por defecto 
-    // al mandar el formulario, lo cual borraría todos nuestros datos en pantalla.
-    e.preventDefault();
-    
-    // Aquí simplemente agarro todo lo que está en 'formData' (lo que el usuario 
-    // escribió) y se lo paso a 'cvData'. Esto es lo que va a "activar"
-    // la visualización del CV en la parte de abajo.
-    setCvData(formData);
-  };
-
-
-
-  // 4. RENDERIZADO DE LA INTERFAZ 
-
+  }
 
   return (
-    <div className="container">
-      {/* SECCIÓN DEL FORMULARIO */}
-      {/* Envuelvo todo en un form para usar el evento onSubmit nativo */}
-      <form className="form-section" onSubmit={handleSubmit}>
-        <h2>Create your CV</h2>
-        
-        {/* Cada input tiene su propio div para poder ordenarlos fácilmente con CSS.
-            El atributo 'name' debe coincidir exactamente con las propiedades de 
-            la interfaz CVData para que la función 'handleChange' funcione bien. */}
-        <div className="input-group">
-          <label>Name:</label>
-          <input type="text" name="name" onChange={handleChange} required />
-        </div>
+    <div>
+      <h1>Formulario para generar CV</h1>
 
-        <div className="input-group">
-          <label>Address:</label>
-          <input type="text" name="address" onChange={handleChange} required />
-        </div>
+      {/* ===================== FORMULARIO ===================== */}
+      {/* Cada input usa onChange para actualizar su estado cada vez que el usuario escribe */}
 
-        <div className="input-group">
-          <label>Email:</label>
-          <input type="email" name="email" onChange={handleChange} required />
-        </div>
+      {/* A cada input/textarea le ponemos color de texto negro y fondo blanco */}
+      {/* directo con "style", para que se vea bien sin importar el tema oscuro */}
+      {/* que trae la plantilla del profe en globals.css */}
 
-        <div className="input-group">
-          <label>Summary:</label>
-          <textarea name="summary" onChange={handleChange} rows={3} required></textarea>
-        </div>
+      <p>
+        Nombre:<br />
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-        <div className="input-group">
-          <label>Experience:</label>
-          <textarea name="experience" onChange={handleChange} rows={3} required></textarea>
-        </div>
+      <p>
+        Direccion:<br />
+        <input
+          type="text"
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-        <div className="input-group">
-          <label>Education:</label>
-          <textarea name="education" onChange={handleChange} rows={3} required></textarea>
-        </div>
+      <p>
+        Email:<br />
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-        <div className="input-group">
-          <label>Languages:</label>
-          <input type="text" name="languages" onChange={handleChange} required />
-        </div>
+      <p>
+        Summary:<br />
+        <textarea
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-        <div className="input-group">
-          <label>Skills:</label>
-          <input type="text" name="skills" onChange={handleChange} required />
-        </div>
+      <p>
+        Experiencia:<br />
+        <textarea
+          value={experiencia}
+          onChange={(e) => setExperiencia(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-        {/* Botón que dispara el submit del formulario */}
-        <button type="submit" className="submit-btn">Generate CV</button>
-      </form>
+      <p>
+        Educacion:<br />
+        <textarea
+          value={educacion}
+          onChange={(e) => setEducacion(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
 
-      {/* SECCIÓN DEL CV GENERADO */}
-      {/* Esta es una condición de React (renderizado condicional). 
-          Si 'cvData' tiene información (es decir, ya le dimos clic al botón), 
-          entonces dibuja todo el bloque del CV. Si es null, no dibuja nada. */}
-      {cvData && (
-        <div className="cv-section">
-          <h2>Curriculum Vitae</h2>
-          <div className="cv-content">
-            {/* Aquí simplemente inyecto las variables guardadas en cvData */}
-            <h3>{cvData.name}</h3>
-            <p><strong>Email:</strong> {cvData.email} | <strong>Address:</strong> {cvData.address}</p>
-            
-            <hr />
-            
-            <h4>Summary</h4>
-            <p>{cvData.summary}</p>
-            
-            <h4>Experience</h4>
-            <p>{cvData.experience}</p>
-            
-            <h4>Education</h4>
-            <p>{cvData.education}</p>
-            
-            <h4>Languages</h4>
-            <p>{cvData.languages}</p>
-            
-            <h4>Skills</h4>
-            <p>{cvData.skills}</p>
-          </div>
-        </div>
-      )}
+      <p>
+        Idiomas:<br />
+        <input
+          type="text"
+          value={idiomas}
+          onChange={(e) => setIdiomas(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
+
+      <p>
+        Skills:<br />
+        <input
+          type="text"
+          value={skills}
+          onChange={(e) => setSkills(e.target.value)}
+          style={{ color: "black", backgroundColor: "white" }}
+        />
+      </p>
+
+      {/* Boton que llama a la funcion generarCV cuando se hace click */}
+      <button onClick={generarCV}>Generar CV</button>
+
+      <hr />
+
+      {/* ===================== CV ===================== */}
+      {/* Aqui se muestran los valores guardados en el estado "cv" */}
+      {/* Esto solo se actualiza cuando se presiona el boton de arriba */}
+
+      <h2>CV</h2>
+
+      <p><b>Nombre:</b> {cv.nombre}</p>
+      <p><b>Direccion:</b> {cv.direccion}</p>
+      <p><b>Email:</b> {cv.email}</p>
+
+      <p><b>Summary:</b></p>
+      <p>{cv.summary}</p>
+
+      <p><b>Experiencia:</b></p>
+      <p>{cv.experiencia}</p>
+
+      <p><b>Educacion:</b></p>
+      <p>{cv.educacion}</p>
+
+      <p><b>Idiomas:</b> {cv.idiomas}</p>
+      <p><b>Skills:</b> {cv.skills}</p>
     </div>
   );
 }
