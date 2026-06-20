@@ -1,14 +1,8 @@
 'use client'
+
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-
-// 1. DEFINICIÓN DE INTERFACES 
-
-// Aquí defino la interfaz o "molde" que le dice a TypeScript exactamente 
-// qué datos voy a manejar en mi formulario y de qué tipo son.
-// Como todos los campos del CV son texto, los defino todos como 'string'.
-// Esto es súper útil porque si me equivoco y trato de meter un dato incorrecto,
-// TypeScript me va a avisar antes de correr el programa, evitando bugs.
+// Estructura utilizada para almacenar la información del CV
 interface CVData {
   name: string;
   address: string;
@@ -20,18 +14,11 @@ interface CVData {
   skills: string;
 }
 
+// Componente principal
 export default function App() {
-  
 
-  // 2. DEFINICIÓN DE ESTADOS
- 
-  
-  // Aquí declaro el estado principal llamado 'formData'. 
-  // Le indico a TypeScript que este estado va a usar la interfaz <CVData>.
-  // Empieza con todos los valores en blanco porque el usuario aún no escribe nada.
-  // Decidí usar un solo objeto en lugar de muchos estados separados para que 
-  // el código sea mucho más limpio y fácil de mantener.
-  const [formData, setFormData] = useState<CVData>({
+  // Estado que almacena los datos ingresados
+  const [info, setInfo] = useState<CVData>({
     name: '',
     address: '',
     email: '',
@@ -42,136 +29,184 @@ export default function App() {
     skills: ''
   });
 
-  // Este segundo estado, 'cvData', lo utilizo para guardar la información final
-  // una vez que el usuario presiona el botón. Empieza como 'null' porque 
-  // al cargar la página no hay ningún CV. 
-  // Notar que le digo a TypeScript que puede ser <CVData | null> (los datos o nada).
-  const [cvData, setCvData] = useState<CVData | null>(null);
+  // Controla si el CV se muestra o no
+  const [showCV, setShowCV] = useState(false);
 
-
-  
-  // 3. FUNCIONES DE MANEJO DE EVENTOS (HANDLERS TIPADOS)
-
-  // La función 'handleChange' se dispara cada vez que el usuario teclea algo.
-  // En TypeScript, tengo que especificar qué tipo de evento es 'e'. 
-  // Uso ChangeEvent y le digo que puede venir de un Input o de un Textarea.
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    // Para no escribir 'e.target.name' y 'e.target.value' a cada rato,
-    // extraigo (desestructuro) el 'name' y el 'value' del input actual.
+  // Actualiza el valor de los campos del formulario
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    
-    // Actualizo el estado del formulario.
-    // Uso el spread operator '...formData' para hacer una copia de todo lo que 
-    // ya estaba escrito, y solo actualizo la propiedad [name] con el nuevo valor.
-    setFormData({
-      ...formData,
+
+    setInfo({
+      ...info,
       [name]: value
     });
   };
 
-  // La función 'handleSubmit' se ejecuta cuando se presiona el botón del formulario.
-  // Aquí el evento es de tipo FormEvent, vinculado a un elemento de formulario HTML.
+  // Procesa el envío del formulario
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // Esto es súper importante: previene que la página se recargue por defecto 
-    // al mandar el formulario, lo cual borraría todos nuestros datos en pantalla.
     e.preventDefault();
-    
-    // Aquí simplemente agarro todo lo que está en 'formData' (lo que el usuario 
-    // escribió) y se lo paso a 'cvData'. Esto es lo que va a "activar"
-    // la visualización del CV en la parte de abajo.
-    setCvData(formData);
+    setShowCV(true);
   };
-
-
-
-  // 4. RENDERIZADO DE LA INTERFAZ 
-
 
   return (
     <div className="container">
-      {/* SECCIÓN DEL FORMULARIO */}
-      {/* Envuelvo todo en un form para usar el evento onSubmit nativo */}
+
+      {/* Formulario principal */}
       <form className="form-section" onSubmit={handleSubmit}>
+
+        {/* Título del formulario */}
         <h2>Create your CV</h2>
-        
-        {/* Cada input tiene su propio div para poder ordenarlos fácilmente con CSS.
-            El atributo 'name' debe coincidir exactamente con las propiedades de 
-            la interfaz CVData para que la función 'handleChange' funcione bien. */}
+
+        {/* Campo para el nombre */}
         <div className="input-group">
           <label>Name:</label>
-          <input type="text" name="name" onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            value={info.name}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
+        {/* Campo para la dirección */}
         <div className="input-group">
           <label>Address:</label>
-          <input type="text" name="address" onChange={handleChange} required />
+          <input
+            type="text"
+            name="address"
+            value={info.address}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
+        {/* Campo para el correo */}
         <div className="input-group">
           <label>Email:</label>
-          <input type="email" name="email" onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            value={info.email}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
+        {/* Resumen profesional */}
         <div className="input-group">
           <label>Summary:</label>
-          <textarea name="summary" onChange={handleChange} rows={3} required></textarea>
+          <textarea
+            name="summary"
+            value={info.summary}
+            onChange={handleInputChange}
+            rows={3}
+            required
+          />
         </div>
 
+        {/* Experiencia laboral */}
         <div className="input-group">
           <label>Experience:</label>
-          <textarea name="experience" onChange={handleChange} rows={3} required></textarea>
+          <textarea
+            name="experience"
+            value={info.experience}
+            onChange={handleInputChange}
+            rows={3}
+            required
+          />
         </div>
 
+        {/* Formación académica */}
         <div className="input-group">
           <label>Education:</label>
-          <textarea name="education" onChange={handleChange} rows={3} required></textarea>
+          <textarea
+            name="education"
+            value={info.education}
+            onChange={handleInputChange}
+            rows={3}
+            required
+          />
         </div>
 
+        {/* Idiomas */}
         <div className="input-group">
           <label>Languages:</label>
-          <input type="text" name="languages" onChange={handleChange} required />
+          <input
+            type="text"
+            name="languages"
+            value={info.languages}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
+        {/* Habilidades */}
         <div className="input-group">
           <label>Skills:</label>
-          <input type="text" name="skills" onChange={handleChange} required />
+          <input
+            type="text"
+            name="skills"
+            value={info.skills}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
-        {/* Botón que dispara el submit del formulario */}
-        <button type="submit" className="submit-btn">Generate CV</button>
+        {/* Botón para generar el CV */}
+        <button type="submit">
+          Generate CV
+        </button>
+
       </form>
 
-      {/* SECCIÓN DEL CV GENERADO */}
-      {/* Esta es una condición de React (renderizado condicional). 
-          Si 'cvData' tiene información (es decir, ya le dimos clic al botón), 
-          entonces dibuja todo el bloque del CV. Si es null, no dibuja nada. */}
-      {cvData && (
+      {/* Muestra el CV cuando se envía el formulario */}
+      {showCV && (
         <div className="cv-section">
+
+          {/* Título del CV */}
           <h2>Curriculum Vitae</h2>
+
           <div className="cv-content">
-            {/* Aquí simplemente inyecto las variables guardadas en cvData */}
-            <h3>{cvData.name}</h3>
-            <p><strong>Email:</strong> {cvData.email} | <strong>Address:</strong> {cvData.address}</p>
-            
+
+            {/* Nombre del candidato */}
+            <h3>{info.name}</h3>
+
+            {/* Información de contacto */}
+            <p>
+              <strong>Email:</strong> {info.email} |
+              <strong> Address:</strong> {info.address}
+            </p>
+
+            {/* Línea separadora */}
             <hr />
-            
+
+            {/* Resumen */}
             <h4>Summary</h4>
-            <p>{cvData.summary}</p>
-            
+            <p>{info.summary}</p>
+
+            {/* Experiencia */}
             <h4>Experience</h4>
-            <p>{cvData.experience}</p>
-            
+            <p>{info.experience}</p>
+
+            {/* Educación */}
             <h4>Education</h4>
-            <p>{cvData.education}</p>
-            
+            <p>{info.education}</p>
+
+            {/* Idiomas */}
             <h4>Languages</h4>
-            <p>{cvData.languages}</p>
-            
+            <p>{info.languages}</p>
+
+            {/* Habilidades */}
             <h4>Skills</h4>
-            <p>{cvData.skills}</p>
+            <p>{info.skills}</p>
+
           </div>
         </div>
       )}
+
     </div>
   );
 }
