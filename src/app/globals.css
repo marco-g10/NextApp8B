@@ -1,26 +1,98 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff0f5;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px;
+  justify-content: center;
+}
+
+.form-section {
+  background-color: #ffe4ec;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2);
+  width: 350px;
+}
+
+.form-section h2 {
+  color: #d63384;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #c2185b;
+  font-weight: bold;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #f8bbd0;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #d63384;
+}
+
+.submit-btn {
+  background-color: #d63384;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  background-color: #ad1457;
+}
+
+.cv-section {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2);
+  width: 400px;
+  border: 2px solid #f8bbd0;
+}
+
+.cv-section h2 {
+  color: #d63384;
+  text-align: center;
+}
+
+.cv-content h3 {
+  color: #ad1457;
+  margin-bottom: 5px;
+}
+
+.cv-content h4 {
+  color: #d63384;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #f8bbd0;
+  padding-bottom: 3px;
+}
+
+.cv-content hr {
+  border: none;
+  border-top: 1px solid #f8bbd0;
+  margin: 15px 0;
 }
