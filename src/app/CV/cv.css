@@ -1,0 +1,119 @@
+/* CV completo */
+.cv-preview {
+  margin-top: 40px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.15);
+}
+
+/* Encabezado */
+.cv-header {
+  background: linear-gradient(135deg, #721f79, #bb3bf6);
+  color: white;
+  text-align: center;
+  padding: 35px;
+}
+
+.cv-header h2 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: 2px;
+}
+
+.cv-header p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Cuerpo */
+.cv-body {
+  padding: 30px;
+}
+
+/* Secciones */
+.cv-body section {
+  margin-bottom: 25px;
+}
+
+/* Títulos */
+.cv-body h3 {
+  color: #dd87ff;
+  margin-bottom: 10px;
+  border-left: 5px solid #ae3bf6;
+  padding-left: 10px;
+}
+
+/* Texto */
+.cv-body p {
+  line-height: 1.8;
+  color: #444;
+}
+
+/* Efecto al pasar el mouse */
+.cv-preview:hover {
+  transform: scale(1.01);
+  transition: 0.3s;
+}
+/* Contenedor del formulario */
+.container {
+  width: 80%;
+  max-width: 900px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Título */
+.container h1 {
+  text-align: center;
+  color: #601f79;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Textareas */
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  min-height: 80px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Cuando el usuario escribe */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #601f79;
+  box-shadow: 0 0 5px rgba(31, 78, 121, 0.4);
+}
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6d1f79;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Efecto del botón */
+button:hover {
+  background-color: #49165c;
+}
