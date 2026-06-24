@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function Page(){
+export default function Page() {
 
     let color: string = "";
-    const [backColor, setBackColor] = useState('white');
+    const [backColor, setBackColor] = useState('blue')
 
     const changeColor = (newColor: string) => {
         color = newColor;
-        setBackColor(newColor);
+        setBackColor(newColor)
         console.log(color);
-    }
+    };
 
-    return(
+    return (
         <div style={{ height: '100vh', background: backColor}}>
             <h1>Cambiar el color del fondo {backColor}</h1>
 
@@ -23,5 +23,5 @@ export default function Page(){
             <br/>
             <button onClick={() => changeColor("red")}>Rojo</button>
         </div>
-    )
+    );
 }
