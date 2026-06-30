@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import TodoList from "../components/TodoList";
+import TodoForm from "../components/TodoForm";
 
 export default function Page(){
 
     const [inputValue, setInputValue] = useState<string>(''); //string
     const [tasks, setTasks] = useState<string[]>([]); //array
 
-    const addTask = () => {
-        setTasks([...tasks, inputValue]);
+    const addTask = (task: string) => {
+        setTasks([...tasks, task]);
 
-        console.log(tasks);
     }
 
     useEffect(() => {
@@ -19,23 +20,9 @@ export default function Page(){
 
     return(
         <div>
-            <input
-            placeholder="Escribe una tarea"
-            style={{background: 'grey'}}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button onClick={addTask} style={{background: 'blue', margin: '1rem'}}>
-                Agregar
-            </button>
+           <TodoForm onAddTodo={addTask} />
 
-            <ul>
-                {tasks.map((task, index) => (
-                <li key={index}>
-                    {task}
-                </li>
-                ))}
-            </ul>
+           <TodoList tasks2 = {tasks} />
         </div>
     )
 }

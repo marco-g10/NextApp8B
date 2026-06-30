@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/sidebar";
+import ReduxProvider from "./redux/provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,7 @@ export default function RootLayout({
     <html>
       <body>
         <Sidebar />
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
         </body>
     </html>
   );
