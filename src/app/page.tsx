@@ -1,57 +1,53 @@
 'use client'
+import Image from "next/image";
 
 export default function Home() {
 
-  //Logica o el JS
-  let name: string = "Marco"; //varieble let - var (ya no se usa)
-  const title: string = "Lista";  //declaramos contantes los valores nunca cambiaran
+//logica o el JS
+let name:string = "Jonathan";
+const title: string = "Lista";
 
-  const frutialumnos: string[] = [
-    "Durazniel",
-    "Platanito",
-    "Cerevelyn",
-    "Cocarlos",
-    "Kiwiker",
-    "Marielina",
-    "Manzavera"
-  ];
+const frutialumnos: string[] = [
+  "Durazniel",
+  "Platanito",
+  "Kiwiker",
+  "Marielina",
+  "Cerevelin"
+];
 
-  //Funciones
-  const monstrarFrutas = () => {
-    console.log(frutialumnos);
-  }
- 
+const mostrarFrutas = () => {
+}
+  console.log("hola");
+
   return (
-    <div>
-      <h1>{title}</h1>
+  // children corresponde a las paginas 
+    <div >
         Hola 8B los saluda {name}
 
         <br></br>
-        <br></br>
 
-        <button onClick={monstrarFrutas}>
+        <button onClick={mostrarFrutas} >
           Mostrar
         </button>
 
         <br></br>
-        <br></br>
 
         <ul>
-          {frutialumnos.map((fruta, index) => (
-            <li key={index}>
+          <li>Mike</li>
+          <li>Carlitos</li>
+          <li>Pancho</li>
+        </ul>
+
+        <ul>
+          {/* 1. Agrega "index" al lado de fruta */}
+          {frutialumnos.map((fruta, index)=> (
+            <li key={index}> 
               {fruta}
             </li>
           ))}
-
-          {frutialumnos.map((fruta) => {
-              let x = 0;
-            return(
-            <li>
-              {fruta}
-            </li>
-            )
-          })}
         </ul>
+
     </div>
+  //*********** 
   );
 }

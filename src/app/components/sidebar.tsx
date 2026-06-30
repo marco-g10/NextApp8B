@@ -1,8 +1,8 @@
 'use client'
 
-import Link from "next/link";
+import Link from "next/link"
 
-export default function Sidebar () {
+export default function sidebar () {
 
 
     return(
@@ -14,16 +14,17 @@ export default function Sidebar () {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/events">
-                        Events
-                    </Link>
+                    <Link href="todolist">
+                        todolist
+                    </Link>                   
                 </li>
                 <li>
-                    <Link href="/changecolor">
-                        ChangeColor
+                    <Link href="/CV">
+                        CV
                     </Link>
                 </li>
             </ul>
         </nav>
     );
 }
+

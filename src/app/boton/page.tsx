@@ -1,15 +1,17 @@
 'use client'
 import { useState, useEffect } from "react";
+
 export default function Page() {
 
-    const [inputValue, setInputValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<string>(''); //para guardar lo que esta en imput se usa el useEstate
+    const [labelValue, setLabelValue] = useState<string>('');
 
     useEffect(() => {
         console.log("Se ejecuta en cada render");
-    }, [inputValue])
+    }, [labelValue])
 
     return (
-        <div>
+        <>
             <input
             placeholder="Escribe algo"
             style={{background:'grey'}}
@@ -18,10 +20,10 @@ export default function Page() {
             onChange={(e) => setInputValue(e.target.value)}
             />
             <br/> 
-            <label>{inputValue}</label>
+            <button onClick={() => setLabelValue(inputValue)}>Cambiar</button>
+            <br/> 
+            <label>{labelValue}</label>
             
-        </div>
+        </>
     )
 }
-
-//input boton y abajo label cuando les des en cambiar se refleja el valor de ese input
