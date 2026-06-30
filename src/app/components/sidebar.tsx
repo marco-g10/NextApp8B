@@ -1,9 +1,16 @@
 'use client'
 
 import Link from "next/link";
+// Importamos usePathname para saber en qué página estamos
+import { usePathname } from "next/navigation";
 
 export default function Sidebar () {
+    const pathname = usePathname();
 
+    // Si estamos en la página del CV, ocultamos por completo la barra de navegación lateral
+    if (pathname === "/cvFormulario") {
+        return null;
+    }
 
     return(
         <nav>
