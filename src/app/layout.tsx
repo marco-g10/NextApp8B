@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/sidebar";
+import CVForm from "./components/CVForm";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,9 +17,9 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <Sidebar />
+        <CVForm />
         {children}
-        </body>
+      </body>
     </html>
   );
 }
