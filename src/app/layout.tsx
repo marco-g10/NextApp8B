@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <Sidebar />
+        {/*<Sidebar >*/}
         {children}
         </body>
     </html>
