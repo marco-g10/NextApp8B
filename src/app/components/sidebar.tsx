@@ -23,6 +23,11 @@ export default function Sidebar () {
                         ChangeColor
                     </Link>
                 </li>
+                <li>
+                    <Link href="/cv">
+                        CV
+                    </Link>
+                </li>
             </ul>
         </nav>
     );
